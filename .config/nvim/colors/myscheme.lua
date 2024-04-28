@@ -12,6 +12,3 @@ vim.api.nvim_set_hl(0,"Operator", {ctermfg=252})   --=
 vim.api.nvim_set_hl(0,"Type", {ctermfg=252})       --{}
 vim.api.nvim_set_hl(0,"Pmenu", {ctermfg=3})
 vim.api.nvim_set_hl(0,"Statement", {ctermfg=13})
-
-----falkfa;lk
---print('c')
