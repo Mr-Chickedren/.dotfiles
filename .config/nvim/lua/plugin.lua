@@ -16,6 +16,7 @@ local neovim_plugins = {
    --require("plugins.hoge"), => write config file (./plugins/hoge.lua)
    require("plugins.nvim-web-devicons"),
    require("plugins.nvim-tree"),
+   require("plugins.markdown-preview"),
 }
 
 require('lazy').setup(neovim_plugins)
