@@ -48,3 +48,11 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 
 -- true color setting
 --vim.opt.termguicolors = true
+
+-- treesitter bug repair
+vim.treesitter.start = (function(wrapped)
+   return function(bufnr, lang)
+      lang = lang or vim.fn.getbufvar(bufnr or '', '&filetype')
+      pcall(wrapped, bufnr, lang)
+   end
+end)(vim.treesitter.start)
