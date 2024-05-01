@@ -17,6 +17,7 @@ local neovim_plugins = {
    require("plugins.nvim-web-devicons"),
    require("plugins.nvim-tree"),
    require("plugins.markdown-preview"),
+   require("plugins.toggleterm"),
 }
 
 require('lazy').setup(neovim_plugins)
