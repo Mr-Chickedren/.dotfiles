@@ -30,13 +30,14 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 
 -- keymap
+vim.g.mapleader = " "
 vim.keymap.set('i','<C-k>','<Up>')
 vim.keymap.set('i','<C-j>','<Down>')
 vim.keymap.set('i','<C-h>','<left>')
 vim.keymap.set('i','<C-l>','<right>')
 vim.keymap.set('n',';',':')
 
-vim.keymap.set('n','<C-h>',':NvimTreeToggle<CR>')
+vim.keymap.set('n','<Leader><tab>',':NvimTreeToggle<CR>')
 
 
 -- setup plugin-manager (lazy.nvim)
