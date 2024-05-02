@@ -13,11 +13,10 @@ vim.opt.rtp:prepend(lazypath)
 
 local neovim_plugins = {
    --'hoge',                  => don't write config file
-   --require("plugins.hoge"), => write config file (./plugins/hoge.lua)
-   require("plugins.nvim-web-devicons"),
-   require("plugins.nvim-tree"),
-   require("plugins.markdown-preview"),
-   require("plugins.toggleterm"),
+   --require("./plugins/hoge"), => write config file (./plugins/hoge.lua)
+   require("./plugins/nvim-web-devicons"),
+   require("./plugins/nvim-tree"),
+   require("./plugins/markdown-preview"),
 }
 
 require('lazy').setup(neovim_plugins)
