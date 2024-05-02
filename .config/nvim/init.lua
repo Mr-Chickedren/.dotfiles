@@ -42,7 +42,7 @@ vim.keymap.set('n','<Leader><tab>',':NvimTreeToggle<CR>')
 
 
 -- setup plugin-manager (lazy.nvim)
-require("plugin")
+require("./plugin")
 
 -- inval explorer
 vim.api.nvim_set_var('loaded_netrw', 1)
@@ -51,6 +51,7 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 -- true color setting
 --vim.opt.termguicolors = true
 
+require("./settings/terminal")
 
 -- treesitter bug repair
 vim.treesitter.start = (function(wrapped)
