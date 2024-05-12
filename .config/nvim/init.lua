@@ -19,7 +19,7 @@ vim.opt.laststatus = 0
 vim.opt.wrap = false
 vim.opt.ruler = false
 
-vim.cmd('colorscheme myscheme')
+vim.cmd("colorscheme myscheme")
 
 --- (maximum number of completion candidates)
 vim.opt.pumheight = 10
@@ -52,11 +52,4 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 --vim.opt.termguicolors = true
 
 require("./settings/terminal")
-
--- treesitter bug repair
-vim.treesitter.start = (function(wrapped)
-   return function(bufnr, lang)
-      lang = lang or vim.fn.getbufvar(bufnr or '', '&filetype')
-      pcall(wrapped, bufnr, lang)
-   end
-end)(vim.treesitter.start)
+require("./settings/inval_treesitter")
