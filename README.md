@@ -1,8 +1,13 @@
 ## install neovim(latest ver)
 ```bash
-sudo add-apt-repository ppa:neovim-ppa/unstable &&
-sudo apt update &&
-sudo apt install neovim -y
+sudo snap install nvim --classic
+```
+if you can't install, you should check to be enabled "systemd".
+```bash
+#/etc/wsl.conf
+
+[boot]
+systemd=true
 ```
 ## install dotfiles
 ```bash
