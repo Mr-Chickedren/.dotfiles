@@ -9,6 +9,8 @@ vim.api.nvim_set_hl(0,"LineNr", {ctermfg=242})
 vim.api.nvim_set_hl(0,"Normal", {ctermbg=0})       --background
 vim.api.nvim_set_hl(0,"Operator", {ctermfg=252})   --=
 vim.api.nvim_set_hl(0,"Type", {ctermfg=252})       --{}
-vim.api.nvim_set_hl(0,"Pmenu", {ctermfg=3})
+vim.api.nvim_set_hl(0,"Pmenu", {ctermfg=8})
+vim.api.nvim_set_hl(0,"PmenuSel", {ctermfg=3})
 vim.api.nvim_set_hl(0,"Statement", {ctermfg=13})
+vim.api.nvim_set_hl(0,"ErrorMsg", {ctermfg=1})
 

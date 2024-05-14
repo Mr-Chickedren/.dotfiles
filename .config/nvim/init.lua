@@ -17,7 +17,6 @@ vim.opt.fillchars:append({eob = ' '})
 vim.opt.ambiwidth = "single"
 vim.opt.laststatus = 0
 vim.opt.wrap = false
-vim.opt.ruler = false
 
 vim.cmd("colorscheme myscheme")
 
@@ -37,6 +36,7 @@ vim.keymap.set('i','<C-j>','<Down>')
 vim.keymap.set('i','<C-h>','<left>')
 vim.keymap.set('i','<C-l>','<right>')
 vim.keymap.set('n',';',':')
+vim.keymap.set('n','<ESC><ESC>',':noh<CR>')
 
 vim.keymap.set('n','<Leader><tab>',':NvimTreeToggle<CR>')
 
