@@ -51,5 +51,4 @@ vim.api.nvim_set_var('loaded_netrwPlugin', 1)
 -- true color setting
 --vim.opt.termguicolors = true
 
-require("./settings/terminal")
-require("./settings/inval_treesitter")
+--require("./settings/terminal")
