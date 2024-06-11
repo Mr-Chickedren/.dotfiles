@@ -17,6 +17,7 @@ vim.opt.fillchars:append({eob = ' '})
 vim.opt.ambiwidth = "single"
 vim.opt.laststatus = 0
 vim.opt.wrap = false
+vim.opt.scrolloff = 5
 
 vim.cmd("colorscheme myscheme")
 
