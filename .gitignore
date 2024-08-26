@@ -2,11 +2,18 @@
 /.**
 
 !/.bashrc
+!/.vimrc
 !/.gitignore
 !/README.md
 
 !/bin
 !/bin/**
+
+!/.vim
+!/.vim/colors.vim
+!/.vim/handmade_commands
+!/.vim/handmade_commands/**
+
 !/.config/nvim/init.lua
 !/.config/nvim/colors/**
 !/.config/nvim/lua/**
