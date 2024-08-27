@@ -9,7 +9,7 @@ set fillchars=eob:\
 set timeoutlen=500
 set ttimeoutlen=10
 let &t_SI = "\e[5 q"
-let &t_EI = "\e[2 q"
+let &t_EI = "\e[0 q"
 
 " clipboard
 set clipboard=unnamedplus
