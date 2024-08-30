@@ -4,6 +4,10 @@ source ~/.vim/colors.vim
 " editor visual
 set number
 set fillchars=eob:\ 
+set tabstop=3
+set softtabstop=3
+set shiftwidth=3
+"set expandtab
 
 " cursor type
 set timeoutlen=500

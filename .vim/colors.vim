@@ -9,3 +9,6 @@ highlight Pmenu ctermbg=darkgrey ctermfg=white
 
 "pop up menu select background and front charactor
 highlight PmenuSel ctermbg=blue ctermfg=white
+
+"{},() setting
+highlight MatchParen cterm=bold,underline ctermbg=NONE ctermfg=darkmagenta
