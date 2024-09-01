@@ -27,4 +27,4 @@ inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
 " handmade commands
-source ~/.vim/handmade_commands/explore.vim
+source ~/.vim/handmade_commands/explopup.vim
