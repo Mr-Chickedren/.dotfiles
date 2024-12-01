@@ -12,3 +12,8 @@ highlight PmenuSel ctermbg=blue ctermfg=white
 
 "{},() setting
 highlight MatchParen cterm=bold,underline ctermbg=NONE ctermfg=darkmagenta
+
+"split color
+highlight! link StatusLine Comment
+highlight! link StatusLineNC Comment
+highlight! link VertSplit Comment
