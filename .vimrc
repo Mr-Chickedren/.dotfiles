@@ -11,6 +11,7 @@ set number
 set fillchars+=eob:\ 
 set fillchars+=vert:┃
 set fillchars+=stl:─,stlnc:─
+set noruler
 set tabstop=3
 set softtabstop=3
 set shiftwidth=3
