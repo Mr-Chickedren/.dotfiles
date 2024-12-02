@@ -25,3 +25,11 @@ function! PopCreate(name, width, height, pos_x, pos_y, content, zindex)
 
 	let s:pop_list[a:name] = l:id
 endfunction
+
+" delete popup window
+function! PopDelete(name)
+	if has_key(s:pop_list, a:name)
+		call popup_close(s:pop_list[a:name])
+		call remove(s:pop_list, a:name)
+	endif
+endfunction
