@@ -2,19 +2,17 @@
 let s:pop_list = {}
 
 " create popup window
-function! PopCreate(name, height, width, margin_height, margin_width, content, zindex)
-	for name in keys(s:pop_list)
-		if name == a:name
-			echo "Error: Don't register same name"
-			return
-		endif
-	endfor
+function! PopCreate(name, width, height, pos_x, pos_y, content, zindex)
+	if has_key(s:pop_list, a:name)
+		echo "Error: Don't register same name"
+		return
+	endif
 
 	let l:id = popup_create(
 		\ a:content,
 		\ {
-			\ 'line': a:margin_height,
-			\ 'col': a:margin_width,
+			\ 'line': a:pos_y,
+			\ 'col': a:pos_x,
 			\ 'minwidth': a:width,
 			\ 'minheight': a:height,
 			\ 'border': [1, 1, 1, 1],
