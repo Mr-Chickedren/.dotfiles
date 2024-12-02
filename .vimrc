@@ -2,9 +2,10 @@
 source ~/.vim/colors.vim
 
 " handmade commands
+source ~/.vim/handmade_commands/keybind.vim
+source ~/.vim/handmade_commands/popup_manager.vim
 source ~/.vim/handmade_commands/explopup.vim
 source ~/.vim/handmade_commands/test.vim
-source ~/.vim/handmade_commands/keybind.vim
 
 " editor visual
 set number
