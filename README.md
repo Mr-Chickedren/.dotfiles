@@ -18,6 +18,6 @@ Acquire::https::Proxy "https://[server]:[port]";
 ```bash
 # ~/.proxy
 
-export HTTP_PROXY="http://[server]:[port]"
-export HTTPS_PROXY="http://[server]:[port]"
+export http_proxy="http://[server]:[port]"
+export https_proxy="https://[server]:[port]"
 ```

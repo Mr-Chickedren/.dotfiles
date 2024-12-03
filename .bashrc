@@ -113,6 +113,6 @@ export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\
 #completion setting (no distinction charactor size)
 bind "set completion-ignore-case on"
 
-if [ -f "~/.proxy" ]; then
-	source ~/.proxy
+if [ -f "$HOME/.proxy" ]; then
+	source "$HOME/.proxy"
 fi
