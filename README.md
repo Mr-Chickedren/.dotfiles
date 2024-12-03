@@ -14,9 +14,10 @@ Acquire::http::Proxy "http://[server]:[port]";
 Acquire::https::Proxy "https://[server]:[port]";
 ```
 
-2. bash proxy settings(tentative)
+2. bash proxy settings
 ```bash
-# ~/.bashrc???
+# ~/.bashrc
 
-export HTTP_PROXY=????
+export HTTP_PROXY="http://${[server]}:${[port]}"
+export HTTPS_PROXY="http://${[server]}:${[port]}"
 ```
