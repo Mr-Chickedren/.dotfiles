@@ -8,8 +8,8 @@ source ~/.vim/handmade_commands/explopup.vim
 source ~/.vim/handmade_commands/test.vim
 
 "indent setting
-autocmd FileType rust,html,md,toml,json set smartindent
-autocmd FileType rust,html,md,toml,json set autoindent
+autocmd FileType rust set smartindent
+autocmd FileType rust set autoindent
 
 " editor visual
 set number
