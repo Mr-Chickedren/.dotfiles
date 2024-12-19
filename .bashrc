@@ -116,3 +116,4 @@ bind "set completion-ignore-case on"
 if [ -f "$HOME/.proxy" ]; then
 	source "$HOME/.proxy"
 fi
+. "$HOME/.cargo/env"

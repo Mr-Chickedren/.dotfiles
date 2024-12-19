@@ -18,6 +18,10 @@ set softtabstop=3
 set shiftwidth=3
 "set expandtab
 
+" search
+set hlsearch
+set incsearch
+
 " cursor type
 set timeoutlen=500
 set ttimeoutlen=10

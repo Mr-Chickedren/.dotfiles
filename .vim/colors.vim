@@ -1,17 +1,23 @@
 "row number
-highlight LineNr ctermfg=DarkGray
+highlight LineNr ctermfg=darkgray
 
 "comment
-highlight Comment ctermfg=DarkGray
+highlight Comment ctermfg=darkgray
 
 "pop up menu background and front charactor
-highlight Pmenu ctermbg=darkgrey ctermfg=white
+highlight Pmenu ctermbg=237 ctermfg=white
 
 "pop up menu select background and front charactor
-highlight PmenuSel ctermbg=blue ctermfg=white
+highlight PmenuSel ctermbg=166 ctermfg=white
 
 "{},() setting
-highlight MatchParen cterm=bold,underline ctermbg=NONE ctermfg=darkmagenta
+highlight MatchParen cterm=bold,underline ctermbg=NONE ctermfg=89
+
+" search
+highlight Search ctermfg=None ctermbg=23
+
+" visual mode
+highlight Visual ctermfg=None ctermbg=237
 
 "split color
 highlight! link StatusLine Comment
