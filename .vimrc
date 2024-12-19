@@ -7,6 +7,10 @@ source ~/.vim/handmade_commands/popup_manager.vim
 source ~/.vim/handmade_commands/explopup.vim
 source ~/.vim/handmade_commands/test.vim
 
+"indent setting
+autocmd FileType rust,html,md,toml,json set smartindent
+autocmd FileType rust,html,md,toml,json set autoindent
+
 " editor visual
 set number
 set fillchars+=eob:\ 
