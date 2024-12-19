@@ -21,3 +21,32 @@ Acquire::https::Proxy "https://[server]:[port]";
 export http_proxy="http://[server]:[port]"
 export https_proxy="https://[server]:[port]"
 ```
+
+## Let's use Alacritty!
+Please place the configration file in the specified location.
+```bash
+# %appdata%/alacritty/alacritty.toml
+
+[terminal.shell]
+program = '/Windows/System32/wsl.exe'
+
+[general]
+working_directory = '\\wsl.localhost\Ubuntu\home\<user_name>'
+
+[font]
+size = 13
+
+[font.normal]
+family = 'FiraMono Nerd Font Mono'
+style = 'Regular'
+
+[font.bold]
+family = 'FiraMono Nerd Font Mono'
+style = 'Bold'
+
+[colors]
+cursor = { text = "CellForeground", cursor = "#505060" }
+
+[env]
+TERM = 'alacritty'
+```
