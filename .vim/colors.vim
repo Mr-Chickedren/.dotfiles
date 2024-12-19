@@ -11,7 +11,7 @@ highlight Pmenu ctermbg=237 ctermfg=white
 highlight PmenuSel ctermbg=166 ctermfg=white
 
 "{},() setting
-highlight MatchParen cterm=bold,underline ctermbg=NONE ctermfg=89
+highlight MatchParen cterm=bold,underline ctermbg=NONE ctermfg=70
 
 " search
 highlight Search ctermfg=None ctermbg=23
