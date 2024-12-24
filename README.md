@@ -7,26 +7,20 @@ bash ./.dotfiles/bin/install.sh -y
 
 ## What if the environment is under a proxy?
 1. apt proxy settings
-```bash
-# /etc/apt/apt.conf
-
+```bash:/etc/apt/apt.conf
 Acquire::http::Proxy "http://[server]:[port]";
 Acquire::https::Proxy "https://[server]:[port]";
 ```
 
 2. bash proxy settings
-```bash
-# ~/.proxy
-
+```bash:~/.proxy
 export http_proxy="http://[server]:[port]"
 export https_proxy="https://[server]:[port]"
 ```
 
 ## Let's use Alacritty!
 Please place the configration file in the specified location.
-```bash
-# %appdata%/alacritty/alacritty.toml
-
+```bash:%appdata%/alacritty/alacritty.toml
 [terminal.shell]
 program = '/Windows/System32/wsl.exe'
 
