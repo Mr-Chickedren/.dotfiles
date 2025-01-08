@@ -1,0 +1,4 @@
+"\C-j": next-history
+"\C-k": previous-history
+"\C-h": backward-char
+"\C-l": forward-char
