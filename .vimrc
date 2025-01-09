@@ -5,11 +5,11 @@ source ~/.vim/colors.vim
 source ~/.vim/handmade_commands/keybind.vim
 source ~/.vim/handmade_commands/popup_manager.vim
 source ~/.vim/handmade_commands/explopup.vim
-source ~/.vim/handmade_commands/test.vim
+"source ~/.vim/handmade_commands/test.vim
 
 "indent setting
-autocmd FileType rust set smartindent
-autocmd FileType rust set autoindent
+autocmd FileType rust,vim set smartindent
+autocmd FileType rust,vim set autoindent
 
 " editor visual
 set number
