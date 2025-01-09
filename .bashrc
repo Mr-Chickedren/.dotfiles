@@ -114,8 +114,10 @@ export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\
 bind "set completion-ignore-case on"
 
 # proxy setting
-if [ -f "$HOME/.proxy" ]; then
-	source "$HOME/.proxy"
+if [ -f "$HOME/.proxy" ] && [ -s "$HOME/.proxy" ]; then
+	addr=$(head -n 1 $HOME/.proxy)
+	export http_proxy="http://$addr"
+	export https_proxy="https://$addr"
 fi
 
 . "$HOME/.cargo/env"
