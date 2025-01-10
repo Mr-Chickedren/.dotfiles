@@ -11,5 +11,7 @@ function! SetKeybind(mode)
 		inoremap <C-k> <Up>
 		inoremap <C-h> <Left>
 		inoremap <C-l> <Right>
+		cnoremap <C-j> <Down>
+		cnoremap <C-k> <Up>
 	endif
 endfunction
