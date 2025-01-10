@@ -18,8 +18,7 @@ Acquire::https::Proxy "https://[server]:[port]";
 ```bash
 # ~/.proxy
 
-export http_proxy="http://[server]:[port]"
-export https_proxy="https://[server]:[port]"
+[server]:[port]
 ```
 
 ## Let's use Alacritty!
