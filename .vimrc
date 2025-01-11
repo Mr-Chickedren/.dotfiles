@@ -36,6 +36,7 @@ let &t_EI = "\e[0 q"
 set clipboard=unnamedplus
 
 " key map (-> ~/.vim/handmade_commands/keybind.vim)
+let mapleader = " "
 :call SetKeybind("normal")
 
 
