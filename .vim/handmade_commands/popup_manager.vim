@@ -87,6 +87,44 @@ function! PopCreate(name, content, posx, posy, width, height, border, zindex)
 	call add(s:pop_list, l:addpop)
 endfunction
 
+" change popup option
+function! PopOption(name, dict)
+	if !exists('s:pop_list') || type(s:pop_list) != type([]) || has_key(a:dict, 'id')
+		return
+	endif
+
+	for l:p in s:pop_list
+		if l:p['name'] ==# a:name
+			for l:key in keys(a:dict)
+				if has_key(l:p, l:key)
+					let l:p[l:key] = a:dict[l:key]
+				endif
+			endfor
+
+			let l:tmp = {}
+			for l:key in keys(l:p)
+				if l:key ==# 'posy'
+					let l:tmp['line'] = l:p['posy']
+				elseif l:key ==# 'posx'
+					let l:tmp['col'] = l:p['posx']
+				elseif l:key ==# 'width'
+					let l:tmp['minwidth'] = l:p['width']
+				elseif l:key ==# 'height'
+					let l:tmp['minheight'] = l:p['height']
+				elseif l:key ==# 'border'
+					let l:tmp['border'] = l:p['border']
+				elseif l:key ==# 'zindex'
+					let l:tmp['zindex'] = l:p['zindex']
+				endif
+			endfor
+
+			call popup_setoptions(l:p['id'], l:tmp)
+
+			return
+		endif
+	endfor
+endfunction
+
 " delete popup window
 function! PopDelete(name)
 	if exists('s:pop_list') && type(s:pop_list) == type([])
@@ -94,6 +132,7 @@ function! PopDelete(name)
 			if s:pop_list[l:i]['name'] ==# a:name
 				call popup_close(s:pop_list[l:i]['id'])
 				call remove(s:pop_list, l:i)
+				return
 			endif
 		endfor
 	endif
