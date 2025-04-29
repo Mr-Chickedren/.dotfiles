@@ -15,6 +15,9 @@
 !/.vim/handmade_commands
 !/.vim/handmade_commands/**
 
+/.vim/handmade_commands/reminder/**
+!/.vim/handmade_commands/reminder/.gitkeep
+
 !/.config/nvim/init.lua
 !/.config/nvim/colors/**
 !/.config/nvim/lua/**
