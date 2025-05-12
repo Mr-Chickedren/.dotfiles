@@ -5,56 +5,33 @@ let s:remind_file = expand('~/.vim/handmade_commands/reminder/pop_list.json')
 " restore pop_list while start vim
 if filereadable(s:remind_file)
 	let content = join(readfile(s:remind_file), "\n")
-	let s:pop_list = json_decode(content)
-
-	if type(s:pop_list) == type([])
-		for p in s:pop_list
-			let id = popup_create(
-				\ p['content'],
-				\ {
-					\ 'line': p['posy'],
-					\ 'col': p['posx'],
-					\ 'minwidth': p['width'],
-					\ 'minheight': p['height'],
-					\ 'border': p['border'],
-					\ 'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
-					\ 'highlight': 'cleared',
-					\ 'fixed': 1,
-					\ 'zindex': p['zindex'],
-				\ }
-			\ )
-
-			let p['id'] = id
-		endfor
-	endif
+	let g:pop_list = json_decode(content)
 endif
 
 " store pop_list while finish vim
 autocmd VimLEavePre * call s:SavePop()
 
 function! s:SavePop() abort
-	if exists('s:pop_list') && type(s:pop_list) == type([])
-		let json = json_encode(s:pop_list)
+	if exists('g:pop_list') && type(g:pop_list) == type({})
+		let json = json_encode(g:pop_list)
 		call writefile(split(json, "\n"), s:remind_file)
 	endif
 endfunction
 
 
-" public fnction""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" public function""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " create popup window
 function! PopCreate(name, content, posx, posy, width, height, border, zindex)
-	if !exists('s:pop_list') || type(s:pop_list) != type([])
-		let s:pop_list = []
+	if !exists('g:pop_list') || type(g:pop_list) != type({})
+		let g:pop_list = {}
 	endif
 
-	if type(s:pop_list) == type([])
-		for l:p in s:pop_list
-			if l:p['name'] ==# a:name
-				echo "Error: Don't register same name"
-				return
-			endif
-		endfor
+	if type(g:pop_list) == type({})
+		if has_key(g:pop_list, a:name)
+			echo "Error: Don't register same name"
+			return
+		endif
 	endif
 
 	let l:id = popup_create(
@@ -74,7 +51,6 @@ function! PopCreate(name, content, posx, posy, width, height, border, zindex)
 
 	let l:addpop = {
 		\ 'id': l:id,
-		\ 'name': a:name,
 		\ 'content': a:content,
 		\ 'posx': a:posx,
 		\ 'posy': a:posy,
@@ -84,67 +60,66 @@ function! PopCreate(name, content, posx, posy, width, height, border, zindex)
 		\ 'zindex': a:zindex,
 		\ }
 
-	call add(s:pop_list, l:addpop)
-endfunction
-
-" change popup option
-function! PopOption(name, dict)
-	if !exists('s:pop_list') || type(s:pop_list) != type([]) || has_key(a:dict, 'id')
-		return
-	endif
-
-	for l:p in s:pop_list
-		if l:p['name'] ==# a:name
-			for l:key in keys(a:dict)
-				if has_key(l:p, l:key)
-					let l:p[l:key] = a:dict[l:key]
-				endif
-			endfor
-
-			let l:tmp = {}
-			for l:key in keys(l:p)
-				if l:key ==# 'posy'
-					let l:tmp['line'] = l:p['posy']
-				elseif l:key ==# 'posx'
-					let l:tmp['col'] = l:p['posx']
-				elseif l:key ==# 'width'
-					let l:tmp['minwidth'] = l:p['width']
-				elseif l:key ==# 'height'
-					let l:tmp['minheight'] = l:p['height']
-				elseif l:key ==# 'border'
-					let l:tmp['border'] = l:p['border']
-				elseif l:key ==# 'zindex'
-					let l:tmp['zindex'] = l:p['zindex']
-				endif
-			endfor
-
-			call popup_setoptions(l:p['id'], l:tmp)
-
-			return
-		endif
-	endfor
+	let g:pop_list[a:name] = l:addpop
 endfunction
 
 " delete popup window
 function! PopDelete(name)
-	if exists('s:pop_list') && type(s:pop_list) == type([])
-		for l:i in range(len(s:pop_list) - 1, 0, -1)
-			if s:pop_list[l:i]['name'] ==# a:name
-				call popup_close(s:pop_list[l:i]['id'])
-				call remove(s:pop_list, l:i)
-				return
-			endif
-		endfor
+	if exists('g:pop_list') && type(g:pop_list) == type({}) && has_key(g:pop_list, a:name)
+		call popup_close(g:pop_list[a:name]['id'])
+		call remove(g:pop_list, a:name)
+		return
 	endif
+endfunction
+
+" change popup option
+" if i change content, use popup_setoptions.
+" if i change other, use PopDelete and PopCreate.
+" copy dictionary and update value in dict.
+function! PopOption(name, change_dict)
+	if !exists('g:pop_list') || type(g:pop_list) != type({}) || has_key(a:change_dict, 'id')
+		return
+	endif
+
+"	for l:p in g:pop_list
+"		if l:p['name'] ==# a:name
+"			for l:key in keys(a:dict)
+"				if has_key(l:p, l:key)
+"					let l:p[l:key] = a:dict[l:key]
+"				endif
+"			endfor
+"
+"			let l:tmp = {}
+"			for l:key in keys(l:p)
+"				if l:key ==# 'posy'
+"					let l:tmp['line'] = l:p['posy']
+"				elseif l:key ==# 'posx'
+"					let l:tmp['col'] = l:p['posx']
+"				elseif l:key ==# 'width'
+"					let l:tmp['minwidth'] = l:p['width']
+"				elseif l:key ==# 'height'
+"					let l:tmp['minheight'] = l:p['height']
+"				elseif l:key ==# 'border'
+"					let l:tmp['border'] = l:p['border']
+"				elseif l:key ==# 'zindex'
+"					let l:tmp['zindex'] = l:p['zindex']
+"				endif
+"			endfor
+"
+"			call popup_setoptions(l:p['id'], l:tmp)
+"
+"			return
+"		endif
+"	endfor
 endfunction
 
 
 " for maintenance"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! PopList()
-	if exists('s:pop_list') && type(s:pop_list) == type([])
-		for l:item in s:pop_list
-			echo l:item['id'] . ": " . l:item['name']
+	if exists('g:pop_list') && type(g:pop_list) == type({})
+		for l:name in keys(g:pop_list)
+			echo g:pop_list[l:name]['id'] . ": " . l:name
 		endfor
 	endif
 endfunction
