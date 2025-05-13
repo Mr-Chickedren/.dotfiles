@@ -39,7 +39,9 @@ function! PopCreate(name, content, posx, posy, width, height, border, zindex)
 		\ {
 			\ 'line': a:posy,
 			\ 'col': a:posx,
+			\ 'maxwidth': a:width,
 			\ 'minwidth': a:width,
+			\ 'maxheight': a:height,
 			\ 'minheight': a:height,
 			\ 'border': a:border,
 			\ 'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
@@ -68,7 +70,6 @@ function! PopDelete(name)
 	if exists('g:pop_list') && type(g:pop_list) == type({}) && has_key(g:pop_list, a:name)
 		call popup_close(g:pop_list[a:name]['id'])
 		call remove(g:pop_list, a:name)
-		return
 	endif
 endfunction
 
@@ -77,40 +78,21 @@ endfunction
 " if i change other, use PopDelete and PopCreate.
 " copy dictionary and update value in dict.
 function! PopOption(name, change_dict)
-	if !exists('g:pop_list') || type(g:pop_list) != type({}) || has_key(a:change_dict, 'id')
+	if !exists('g:pop_list') || type(g:pop_list) != type({}) || has_key(a:change_dict, 'id') || !has_key(g:pop_list, a:name)
 		return
 	endif
 
-"	for l:p in g:pop_list
-"		if l:p['name'] ==# a:name
-"			for l:key in keys(a:dict)
-"				if has_key(l:p, l:key)
-"					let l:p[l:key] = a:dict[l:key]
-"				endif
-"			endfor
-"
-"			let l:tmp = {}
-"			for l:key in keys(l:p)
-"				if l:key ==# 'posy'
-"					let l:tmp['line'] = l:p['posy']
-"				elseif l:key ==# 'posx'
-"					let l:tmp['col'] = l:p['posx']
-"				elseif l:key ==# 'width'
-"					let l:tmp['minwidth'] = l:p['width']
-"				elseif l:key ==# 'height'
-"					let l:tmp['minheight'] = l:p['height']
-"				elseif l:key ==# 'border'
-"					let l:tmp['border'] = l:p['border']
-"				elseif l:key ==# 'zindex'
-"					let l:tmp['zindex'] = l:p['zindex']
-"				endif
-"			endfor
-"
-"			call popup_setoptions(l:p['id'], l:tmp)
-"
-"			return
-"		endif
-"	endfor
+	for l:key in keys(a:change_dict)
+		if has_key(g:pop_list[a:name], l:key)
+			let g:pop_list[a:name][l:key] = a:change_dict[l:key]
+		endif
+	endfor
+
+	let l:save_dict = g:pop_list[a:name]
+
+	" rewrite window
+	call PopDelete(a:name)
+	call PopCreate(a:name, l:save_dict['content'], l:save_dict['posx'], l:save_dict['posy'], l:save_dict['width'], l:save_dict['height'], l:save_dict['border'], l:save_dict['zindex'])
 endfunction
 
 
