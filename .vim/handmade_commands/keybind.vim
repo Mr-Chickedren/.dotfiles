@@ -100,6 +100,7 @@ function! SetKeybind(mode)
 		nnoremap <HOME> <Nop>
 		nnoremap <PageUp> <Nop>
 		nnoremap <PageDown> <Nop>
+
 	elseif a:mode == "normal"
 		nnoremap a a
 		nnoremap A A
@@ -233,6 +234,13 @@ function! SetKeybind(mode)
 		cnoremap <Left> <Nop>
 		cnoremap <Right> <Nop>
 
-	elseif a:mode == "pop_exp"
+
+		" pop_exp
+		nnoremap <Leader><Tab> :call ExpOpen()<CR>
+
+	elseif a:mode == "exp"
+		nnoremap <Leader><Tab> :call ExpClose()<CR>
+		nnoremap < :call ExpChangeSize(10)<CR>
+		nnoremap > :call ExpChangeSize(-10)<CR>
 	endif
 endfunction
