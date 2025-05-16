@@ -74,9 +74,6 @@ function! PopDelete(name)
 endfunction
 
 " change popup option
-" if i change content, use popup_setoptions.
-" if i change other, use PopDelete and PopCreate.
-" copy dictionary and update value in dict.
 function! PopOption(name, change_dict)
 	if !exists('g:pop_list') || type(g:pop_list) != type({}) || has_key(a:change_dict, 'id') || !has_key(g:pop_list, a:name)
 		return
@@ -95,6 +92,14 @@ function! PopOption(name, change_dict)
 	call PopCreate(a:name, l:save_dict['content'], l:save_dict['posx'], l:save_dict['posy'], l:save_dict['width'], l:save_dict['height'], l:save_dict['border'], l:save_dict['zindex'])
 endfunction
 
+" get popup exists
+function! PopExists(name)
+	if exists('g:pop_list') && has_key(g:pop_list, a:name)
+		return v:true
+	else
+		return v:false
+	endif
+endfunction
 
 " for maintenance"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
