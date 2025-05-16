@@ -36,7 +36,7 @@ function! ExpOpen()
 		let g:pop_exp_per = 20
 	endif
 
-	call PopCreate("exp", s:ExpGenContent(), float2nr(&columns*(1.0-(g:pop_exp_per)/100.0)+1.0), 1, float2nr(&columns*(g:pop_exp_per/100.0)+1.0), &lines-1, [0,0,0,1], 50)
+	call PopCreate("exp", s:ExpGenContent(), float2nr(&columns*(1.0-(g:pop_exp_per)/100.0)+1.0), 1, float2nr(&columns*(g:pop_exp_per/100.0)+1.0), &lines-1, [0,0,0,1], v:false)
 
 	call SetKeybind("LAZY")
 	call SetKeybind("exp")

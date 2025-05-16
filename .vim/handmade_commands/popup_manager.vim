@@ -13,6 +13,12 @@ autocmd VimLEavePre * call s:SavePop()
 
 function! s:SavePop() abort
 	if exists('g:pop_list') && type(g:pop_list) == type({})
+		for l:name in keys(g:pop_list)
+			if !g:pop_list[l:name]['save']
+				call remove(g:pop_list, l:name)
+			endif
+		endfor
+
 		let json = json_encode(g:pop_list)
 		call writefile(split(json, "\n"), s:remind_file)
 	endif
@@ -22,7 +28,7 @@ endfunction
 " public function""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " create popup window
-function! PopCreate(name, content, posx, posy, width, height, border, zindex)
+function! PopCreate(name, content, posx, posy, width, height, border, save)
 	if !exists('g:pop_list') || type(g:pop_list) != type({})
 		let g:pop_list = {}
 	endif
@@ -47,7 +53,7 @@ function! PopCreate(name, content, posx, posy, width, height, border, zindex)
 			\ 'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
 			\ 'highlight': 'cleared',
 			\ 'fixed': 1,
-			\ 'zindex': a:zindex,
+			\ 'zindex': 50,
 		\ }
 	\ )
 
@@ -59,7 +65,7 @@ function! PopCreate(name, content, posx, posy, width, height, border, zindex)
 		\ 'width': a:width,
 		\ 'height': a:height,
 		\ 'border': a:border,
-		\ 'zindex': a:zindex,
+		\ 'save': a:save,
 		\ }
 
 	let g:pop_list[a:name] = l:addpop
@@ -89,7 +95,7 @@ function! PopOption(name, change_dict)
 
 	" rewrite window
 	call PopDelete(a:name)
-	call PopCreate(a:name, l:save_dict['content'], l:save_dict['posx'], l:save_dict['posy'], l:save_dict['width'], l:save_dict['height'], l:save_dict['border'], l:save_dict['zindex'])
+	call PopCreate(a:name, l:save_dict['content'], l:save_dict['posx'], l:save_dict['posy'], l:save_dict['width'], l:save_dict['height'], l:save_dict['border'], l:save_dict['save'])
 endfunction
 
 " get popup exists
