@@ -1,11 +1,42 @@
+function! s:ExpGenContent()
+	" scan current directory
+	let l:list = filter(glob(".",0,1), "v:val !=# '.' && v:val !=# '..' && v:val !~ '\\.swp$'") + glob("*",0,1)
+
+	" get index of openning file
+	if !exists('s:exp_pos')
+		for l:i in range(len(l:list))
+			if l:list[l:i] ==# expand('%:t')
+				let s:exp_pos = l:i
+				break
+			endif
+		endfor
+	endif
+
+	" check index number
+	if 0 > s:exp_pos
+		let s:exp_pos = 0
+	elseif len(l:list) <= s:exp_pos
+		let s:exp_pos = len(l:list) - 1
+	endif
+
+	" add cursor
+	for l:i in range(len(l:list))
+		if l:i == s:exp_pos
+			let l:list[l:i] = "> " . l:list[l:i]
+		else
+			let l:list[l:i] = "  " . l:list[l:i]
+		endif
+	endfor
+
+	return l:list
+endfunction
+
 function! ExpOpen()
 	if !exists('g:pop_exp_per')
 		let g:pop_exp_per = 20
 	endif
 
-	let l:list = filter(glob(".",0,1), "v:val !=# '.' && v:val !=# '..' && v:val !~ '\\.swp$'") + glob("*",0,1)
-
-	call PopCreate("exp", l:list, float2nr(&columns*(1.0-(g:pop_exp_per)/100.0)+1.0), 1, float2nr(&columns*(g:pop_exp_per/100.0)+1.0), &lines-1, [0,0,0,1], 50)
+	call PopCreate("exp", s:ExpGenContent(), float2nr(&columns*(1.0-(g:pop_exp_per)/100.0)+1.0), 1, float2nr(&columns*(g:pop_exp_per/100.0)+1.0), &lines-1, [0,0,0,1], 50)
 
 	call SetKeybind("LAZY")
 	call SetKeybind("exp")
@@ -27,4 +58,14 @@ function! ExpChangeSize(delta)
 	endif
 
 	call PopOption("exp",{'posx': float2nr(&columns*(1.0-(g:pop_exp_per)/100.0)+1.0), 'width': float2nr(&columns*(g:pop_exp_per/100.0)+1.0)})
+endfunction
+
+function! ExpMoveCursor(delta)
+	if !exists('s:exp_pos') || !PopExists("exp")
+		return
+	endif
+
+	let s:exp_pos = s:exp_pos + a:delta
+
+	call PopOption("exp",{'content': s:ExpGenContent()})
 endfunction

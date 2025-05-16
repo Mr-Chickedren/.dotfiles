@@ -242,5 +242,7 @@ function! SetKeybind(mode)
 		nnoremap <Leader><Tab> :call ExpClose()<CR>
 		nnoremap < :call ExpChangeSize(10)<CR>
 		nnoremap > :call ExpChangeSize(-10)<CR>
+		nnoremap <silent> j :call ExpMoveCursor(1)<Bar>echo ""<CR>
+		nnoremap <silent> k :call ExpMoveCursor(-1)<Bar>echo ""<CR>
 	endif
 endfunction
