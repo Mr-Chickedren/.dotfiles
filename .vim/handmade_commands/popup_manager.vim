@@ -28,7 +28,7 @@ endfunction
 " public function""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " create popup window
-function! PopCreate(name, content, posx, posy, width, height, border, save)
+function! PopCreate(name, content, posx, posy, width, height, border, save, exinfo)
 	if !exists('g:pop_list') || type(g:pop_list) != type({})
 		let g:pop_list = {}
 	endif
@@ -66,6 +66,7 @@ function! PopCreate(name, content, posx, posy, width, height, border, save)
 		\ 'height': a:height,
 		\ 'border': a:border,
 		\ 'save': a:save,
+		\ 'exinfo': a:exinfo,
 		\ }
 
 	let g:pop_list[a:name] = l:addpop
@@ -85,9 +86,14 @@ function! PopOption(name, change_dict)
 		return
 	endif
 
+	let l:org_dict = g:pop_list[a:name]
+
 	for l:key in keys(a:change_dict)
 		if has_key(g:pop_list[a:name], l:key)
 			let g:pop_list[a:name][l:key] = a:change_dict[l:key]
+		else
+			let g:pop_list[a:name] = l:org_dict
+			return
 		endif
 	endfor
 
@@ -95,7 +101,7 @@ function! PopOption(name, change_dict)
 
 	" rewrite window
 	call PopDelete(a:name)
-	call PopCreate(a:name, l:save_dict['content'], l:save_dict['posx'], l:save_dict['posy'], l:save_dict['width'], l:save_dict['height'], l:save_dict['border'], l:save_dict['save'])
+	call PopCreate(a:name, l:save_dict['content'], l:save_dict['posx'], l:save_dict['posy'], l:save_dict['width'], l:save_dict['height'], l:save_dict['border'], l:save_dict['save'], l:save_dict['exinfo'])
 endfunction
 
 " get popup exists
@@ -105,6 +111,15 @@ function! PopExists(name)
 	else
 		return v:false
 	endif
+endfunction
+
+" output exinfo
+function! PopPutExinfo(name)
+	if !exists('g:pop_list') || type(g:pop_list) != type({}) || !has_key(g:pop_list, a:name)
+		return {}
+	endif
+
+	return g:pop_list[a:name]['exinfo']
 endfunction
 
 " for maintenance"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
