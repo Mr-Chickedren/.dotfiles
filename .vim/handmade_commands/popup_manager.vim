@@ -80,7 +80,7 @@ function! PopDelete(name)
 	endif
 endfunction
 
-" change basic popup option
+" change popup option
 function! PopOption(name, change_dict, change_exinfo)
 	if !exists('g:pop_list') || type(g:pop_list) != type({}) || has_key(a:change_dict, 'id') || !has_key(g:pop_list, a:name)
 		return
