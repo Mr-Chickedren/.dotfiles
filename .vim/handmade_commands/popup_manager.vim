@@ -80,21 +80,25 @@ function! PopDelete(name)
 	endif
 endfunction
 
-" change popup option
-function! PopOption(name, change_dict)
+" change basic popup option
+function! PopOption(name, change_dict, change_exinfo)
 	if !exists('g:pop_list') || type(g:pop_list) != type({}) || has_key(a:change_dict, 'id') || !has_key(g:pop_list, a:name)
 		return
 	endif
 
 	let l:org_dict = g:pop_list[a:name]
 
-	for l:key in keys(a:change_dict)
+	for l:key in filter(keys(a:change_dict), 'v:val !=# "exinfo"')
 		if has_key(g:pop_list[a:name], l:key)
 			let g:pop_list[a:name][l:key] = a:change_dict[l:key]
 		else
 			let g:pop_list[a:name] = l:org_dict
 			return
 		endif
+	endfor
+
+	for l:key in keys(a:change_exinfo)
+		let g:pop_list[a:name]['exinfo'][l:key] = a:change_exinfo[l:key]
 	endfor
 
 	let l:save_dict = g:pop_list[a:name]
@@ -135,6 +139,7 @@ function! PopReveal(name)
 		call popup_show(g:pop_list[a:name]['id'])
 	endif
 endfunction
+
 
 " for maintenance"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
