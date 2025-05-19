@@ -122,6 +122,20 @@ function! PopPutExinfo(name)
 	return g:pop_list[a:name]['exinfo']
 endfunction
 
+" hiden popup
+function! PopHide(name)
+	if exists('g:pop_list') && type(g:pop_list) == type({}) && has_key(g:pop_list, a:name)
+		call popup_hide(g:pop_list[a:name]['id'])
+	endif
+endfunction
+
+" reveal popup
+function! PopReveal(name)
+	if exists('g:pop_list') && type(g:pop_list) == type({}) && has_key(g:pop_list, a:name)
+		call popup_show(g:pop_list[a:name]['id'])
+	endif
+endfunction
+
 " for maintenance"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! PopList()
