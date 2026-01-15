@@ -57,7 +57,7 @@ vim /etc/pacman.d/mirrorlist
 ```bash
 pacman -Sy archlinux-keyring
 
-pacstrap /mnt base linux linux-firmware vim iwd git sudo
+pacstrap /mnt base linux linux-firmware vim iwd dhcpcd git sudo
 ```
 
 ### 7. remind mounts
@@ -88,5 +88,11 @@ usermod -aG wheel audio [username]
 EDITOR=vim visudo
 ```
 
-### 12. install boot-manager
+### 12. enable network services
+```bash
+sudo systemctl enable --now iwd
+sudo systemctl enable --now dhcpcd
+```
+
+### 13. install boot-manager
 TODO: want to use systemd-boot
