@@ -1,0 +1,11 @@
+[Unit]
+Description=PipeWire Continuous Silence Service
+After=pipewire.service
+PartOf=pipewire.service
+
+[Service]
+ExecStart=/usr/bin/pw-cat --playback --format=s16 --rate=44100 --channels=2 /dev/zero
+Restart=always
+
+[Install]
+WantedBy=default.target
