@@ -25,7 +25,7 @@ cgdisk /dev/nvme*n*
 ```
 
 delete all current partitions and serect 'new' in freespace
-|par |1    |2    |3    |4         |
+|par |Q1   |Q2   |Q3   |Q4        |
 |:---|:---:|:---:|:---:|:--------:|
 |efi |Enter|+512M|ef00 |ARCH\_EFI |
 |root|Enter|-3G  |Enter|ARCH\-ROOT|
