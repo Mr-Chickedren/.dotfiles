@@ -1,6 +1,6 @@
 # arch linux dev
 
-## TODO before clone this (in live dev)
+## in live dev
 
 ### 1. connect network (if you use wifi)
 ```bash
@@ -28,8 +28,8 @@ delete all current partitions and serect 'new' in freespace
 |par |Q1   |Q2   |Q3   |Q4        |
 |:---|:---:|:---:|:---:|:--------:|
 |efi |Enter|+512M|ef00 |ARCH\_EFI |
-|root|Enter|-3G  |Enter|ARCH\-ROOT|
-|swap|Enter|Enter|8200 |swap      |
+|root|Enter|-3G  |Enter|ARCH\_ROOT|
+|swap|Enter|Enter|8200 |ARCH\_SWAP|
 
 ### 3. format each partitions
 ```bash
@@ -57,7 +57,7 @@ vim /etc/pacman.d/mirrorlist
 ```bash
 pacman -Sy archlinux-keyring
 
-pacstrap /mnt base linux linux-firmware vim iwd dhcpcd git sudo
+pacstrap /mnt base linux linux-firmware vim iwd dhcpcd sudo
 ```
 
 ### 7. remind mounts
@@ -70,12 +70,14 @@ genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 ```
 
-### 9. make password for root
+## chroot
+
+### 1. make password for root
 ```bash
 passwd
 ```
 
-### 10. add user and append groups
+### 2. add user and append groups
 ```bash
 useradd [username]
 passwd [username]
@@ -83,16 +85,45 @@ passwd [username]
 usermod -aG wheel audio [username]
 ```
 
-### 11. add sudo user
+### 3. add sudo user
 ```bash
 EDITOR=vim visudo
 ```
 
-### 12. enable network services
+### 4. install other
+```bash
+pacman -Syu
+pacman -S amd-ucode git
+```
+
+### 5. install boot-manager
+```bash
+bootctl install
+```
+edit /boot/loader/loader.conf
+```bash
+default arch
+timeout menu-force
+console-mode max
+editor no
+```
+edit /boot/loader/entries/arch.conf
+```bash
+title Arch Linux
+linx /vmlinuz-linux
+initrd /initramfs-linux.img
+options root=PARTUUID=[ROOT partition PARTUUID] rw quiet
+```
+> [!NOTE]
+> you can find PARTUUID when run ```blkid | grep ARCH_ROOT```
+> plz check ```bootctl list``` and confirm that default is "arch"
+
+
+## before reboot
+
+### 1. enable network services
 ```bash
 sudo systemctl enable --now iwd
 sudo systemctl enable --now dhcpcd
 ```
 
-### 13. install boot-manager
-TODO: want to use systemd-boot
