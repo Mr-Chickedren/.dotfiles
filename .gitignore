@@ -5,10 +5,14 @@
 !/.vimrc
 !/.gitignore
 !/.inputrc
+!/.tmux.conf
 !/README.md
 
 !/bin/
 !/bin/**
+
+!/bootmgr/
+!/bootmgr/**
 
 !/.vim/
 !/.vim/colors.vim
